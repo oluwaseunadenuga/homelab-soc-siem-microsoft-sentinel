@@ -6,7 +6,7 @@
 ![SOC](https://img.shields.io/badge/SOC-Lab-green)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-## Executive Summary
+## Project Overview
 
 This project demonstrates the design and implementation of a cloud-based Security Operations Centre (SOC) home lab using Microsoft Azure, Microsoft Sentinel, Log Analytics Workspace, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL and GeoIP enrichment.
 An intentionally exposed Windows honeypot was deployed to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Event ID 4625 was used as the primary detection signal for suspicious login activity.
@@ -15,7 +15,7 @@ The investigation was extended by enriching attacker IP addresses with geographi
 
 ---
 
-## Objectives**
+## Objectives
 - [Deploy an Azure Windows honeypot]
 - [Generate and observe failed authentication activity]
 - [Centralise Windows Security Events]
@@ -182,22 +182,24 @@ Enrich the IP using threat intelligence/GeoIP.
 Determine whether the activity resembles brute force or password spraying.
 Document the investigation.
 Apply containment where appropriate.
+
 ---
+
 📸 Evidence Gallery
-Replace the placeholders below with your own screenshots.
-Evidence	Screenshot
-Azure VM	`screenshots/01-azure-vm.png`
-Network Security Group	`screenshots/02-network-security-group.png`
-Event ID 4625	`screenshots/03-event-viewer-4625.png`
-Log Analytics Workspace	`screenshots/04-log-analytics-workspace.png`
-Microsoft Sentinel	`screenshots/05-microsoft-sentinel.png`
-AMA Connector	`screenshots/06-ama-connector.png`
-DCR	`screenshots/07-dcr.png`
-KQL Investigation	`screenshots/08-kql-query.png`
-Attacker IP	`screenshots/09-attacker-ip.png`
-GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`
-Sentinel Alert	`screenshots/11-sentinel-alert.png`
+- [Evidence	Screenshot]
+- [ Azure VM	`screenshots/01-azure-vm.png`]
+- [Network Security Group	`screenshots/02-network-security-group.png`]
+- [Event ID 4625	`screenshots/03-event-viewer-4625.png`]
+- [Log Analytics Workspace	`screenshots/04-log-analytics-workspace.png`]
+- [Microsoft Sentinel	`screenshots/05-microsoft-sentinel.png`]
+- [AMA Connector	`screenshots/06-ama-connector.png`]
+- [DCR	`screenshots/07-dcr.png`]
+- [KQL Investigation	`screenshots/08-kql-query.png`]
+- [Attacker IP	`screenshots/09-attacker-ip.png`]
+- [GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`]
+- [ Sentinel Alert	`screenshots/11-sentinel-alert.png`]
 ---
+
 📊 SOC Investigation Workflow
 ```text
 COLLECT
@@ -268,9 +270,10 @@ homelab-soc-siem/
 └── screenshots/
 ```
 ---
-📌 Key Findings
-> Complete this section using the actual results from your lab.
-Total failed authentication events: [INSERT VALUE]
+
+Key Findings
+
+-[Total failed authentication events: [INSERT VALUE] ]
 Most active source IP: [REDACTED / INSERT VALUE]
 Highest failed-attempt count: [INSERT VALUE]
 Targeted account(s): [INSERT VALUE]
@@ -278,7 +281,8 @@ Observed attack window: [INSERT VALUE]
 GeoIP context: [INSERT VALUE]
 Initial assessment: [BRUTE FORCE / PASSWORD SPRAYING / OTHER]
 ---
-🚀 Future Enhancements
+
+Future Enhancements
 Add Microsoft Defender for Endpoint.
 Deploy Sysmon telemetry.
 Detect password spraying.
@@ -292,27 +296,19 @@ Monitor PowerShell activity.
 Add Linux telemetry.
 Expand to multiple honeypots.
 ---
-⚠️ Security & Cost Disclaimer
+
+ Security & Cost Disclaimer
 This project is intended for educational and defensive security research.
 The honeypot is intentionally exposed for telemetry generation and must remain isolated from production systems.
 Do not store sensitive data, personal credentials, secrets, production workloads or confidential information on the honeypot.
 Azure resources can generate charges. Stop/deallocate or remove resources when the lab is not in use.
-Before publishing screenshots, redact:
-Subscription IDs
-Tenant IDs
-Personal IP addresses
-Usernames/passwords
-API keys
-Tokens
-Secrets
-Personal information
+
 ---
-📚 References
+References
 Microsoft Azure — https://azure.microsoft.com/
 Azure Portal — https://portal.azure.com/
 Microsoft Sentinel — https://learn.microsoft.com/azure/sentinel/
 Kusto Query Language — https://learn.microsoft.com/kusto/query/
 KC7 Cyber — https://kc7cyber.com/
+
 ---
-⭐ Portfolio Statement
-Designed and implemented a Microsoft Azure-based SOC homelab using Microsoft Sentinel to detect and investigate suspicious Windows authentication activity. Built centralized telemetry collection with Azure Monitor Agent and Data Collection Rules, developed KQL detections for Event ID 4625, identified suspicious source IP addresses and enriched security events using Sentinel GeoIP Watchlists.
