@@ -1,0 +1,4 @@
+// Detect Windows failed authentication events
+SecurityEvent
+| where EventId == 4625
+| order by TimeGenerated desc

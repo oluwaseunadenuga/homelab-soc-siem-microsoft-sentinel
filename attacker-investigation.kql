@@ -1,0 +1,6 @@
+// Investigate a specific source IP
+SecurityEvent
+| where IpAddress == "<ATTACKER_IP>"
+| where EventId == 4625
+| project TimeGenerated, Account, IpAddress, Computer, LogonType
+| order by TimeGenerated desc

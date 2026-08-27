@@ -1,0 +1,12 @@
+// Candidate Microsoft Sentinel Analytics Rule
+// Investigates repeated failed authentication attempts by source IP.
+
+SecurityEvent
+| where EventID == 4625
+| summarize
+    FailedAttempts = count(),
+    FirstSeen = min(TimeGenerated),
+    LastSeen = max(TimeGenerated)
+    by IpAddress
+| where FailedAttempts >= 10
+| order by FailedAttempts desc

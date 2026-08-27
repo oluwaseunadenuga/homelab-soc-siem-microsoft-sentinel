@@ -1,0 +1,5 @@
+// Identify source IPs generating the most failed logins
+SecurityEvent
+| where EventId == 4625
+| summarize FailedAttempts = count() by IpAddress
+| order by FailedAttempts desc
