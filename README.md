@@ -155,10 +155,10 @@ let WindowsEvents =
 
 WindowsEvents
 ```
-Investigation Value
-GeoIP enrichment helps an analyst move from:
-Raw IP → Network → Geographic Context → Investigation
-Geographic information should be treated as contextual intelligence rather than proof of an attacker's physical location.
+## Investigation Value
+- GeoIP enrichment helps an analyst move from: Raw IP → Network → Geographic Context → Investigation
+- Geographic information should be treated as contextual intelligence rather than proof of an attacker's physical location.
+
 ---
 
 Detection Rule
