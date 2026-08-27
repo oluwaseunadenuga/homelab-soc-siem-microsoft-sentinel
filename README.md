@@ -159,6 +159,7 @@ GeoIP enrichment helps an analyst move from:
 Raw IP → Network → Geographic Context → Investigation
 Geographic information should be treated as contextual intelligence rather than proof of an attacker's physical location.
 ---
+
 Detection Rule
 The following query can form the basis of a Sentinel Analytics Rule for repeated failed authentication attempts:
 ```kql
@@ -172,21 +173,22 @@ SecurityEvent
 | where FailedAttempts >= 10
 | order by FailedAttempts desc
 ```
+
 Suggested SOC Triage
-When triggered:
-Validate the source IP.
-Review the number and timing of failures.
-Identify targeted accounts.
-Check for successful authentication after failures.
-Review logon type and target host.
-Enrich the IP using threat intelligence/GeoIP.
-Determine whether the activity resembles brute force or password spraying.
-Document the investigation.
-Apply containment where appropriate.
+- When triggered:
+- Validate the source IP.
+- Review the number and timing of failures.
+- Identify targeted accounts.
+- Check for successful authentication after failures.
+- Review logon type and target host.
+- Enrich the IP using threat intelligence/GeoIP.
+- Determine whether the activity resembles brute force or password spraying.
+- Document the investigation.
+- Apply containment where appropriate.
 
 ---
 
-📸 Evidence Gallery
+Evidence Gallery
 - Evidence	Screenshot
 - Azure VM	`screenshots/01-azure-vm.png`
 - Network Security Group	`screenshots/02-network-security-group.png`
@@ -201,8 +203,9 @@ Apply containment where appropriate.
 - Sentinel Alert	`screenshots/11-sentinel-alert.png`
 ---
 
-📊 SOC Investigation Workflow
+SOC Investigation Workflow
 ```text
+
 COLLECT
    ↓
 DETECT
@@ -221,32 +224,34 @@ RESPOND
    ↓
 DOCUMENT
 ```
+
 ---
+
 🧠 Skills Demonstrated
-Security Operations
-SIEM monitoring
-Alert triage
-Authentication investigation
-IOC analysis
-Log analysis
-Threat detection
-Incident documentation
-Microsoft Security
-Microsoft Sentinel
-Log Analytics
-Azure Monitor Agent
-Data Collection Rules
-Sentinel Watchlists
-Detection Engineering
-KQL filtering
-Aggregation
-Threshold-based detection
-Source IP analysis
-GeoIP enrichment
-Cloud Security
-Azure VM deployment
-Network Security Groups
-Cloud logging
+-Security Operations
+- SIEM monitoring
+- Alert triage
+- Authentication investigation
+- IOC analysis
+- Log analysis
+- Threat detection
+- Incident documentation
+- Microsoft Security
+- Microsoft Sentinel
+- Log Analytics
+- Azure Monitor Agent
+- Data Collection Rules
+- Sentinel Watchlists
+- Detection Engineering
+- KQL filtering
+- Aggregation
+- Threshold-based detection
+- Source IP analysis
+- GeoIP enrichment
+- Cloud Security
+- Azure VM deployment
+- Network Security Groups
+- Cloud logging
 Cloud SIEM architecture
 ---
 📁 Repository Structure
@@ -272,44 +277,32 @@ homelab-soc-siem/
 ```
 ---
 
-Key Findings
+## Key Findings
 
--[Total failed authentication events: [INSERT VALUE] ]
-Most active source IP: [REDACTED / INSERT VALUE]
-Highest failed-attempt count: [INSERT VALUE]
-Targeted account(s): [INSERT VALUE]
-Observed attack window: [INSERT VALUE]
-GeoIP context: [INSERT VALUE]
-Initial assessment: [BRUTE FORCE / PASSWORD SPRAYING / OTHER]
+-Total failed authentication events: [INSERT VALUE]
+- Most active source IP: [REDACTED / INSERT VALUE]
+- Highest failed-attempt count: [INSERT VALUE]
+- Targeted account(s): [INSERT VALUE]
+- Observed attack window: [INSERT VALUE]
+- GeoIP context: [INSERT VALUE]
+- Initial assessment: [BRUTE FORCE / PASSWORD SPRAYING / OTHER]
 ---
 
-Future Enhancements
-Add Microsoft Defender for Endpoint.
-Deploy Sysmon telemetry.
-Detect password spraying.
-Detect successful logins following repeated failures.
-Map detections to MITRE ATT&CK.
-Create Sentinel Workbooks.
-Add threat-intelligence feeds.
-Create automated Sentinel playbooks.
-Add automated IP reputation checks.
-Monitor PowerShell activity.
-Add Linux telemetry.
-Expand to multiple honeypots.
----
 
- Security & Cost Disclaimer
+## Security & Cost Disclaimer
 This project is intended for educational and defensive security research.
 The honeypot is intentionally exposed for telemetry generation and must remain isolated from production systems.
 Do not store sensitive data, personal credentials, secrets, production workloads or confidential information on the honeypot.
 Azure resources can generate charges. Stop/deallocate or remove resources when the lab is not in use.
 
 ---
-References
-Microsoft Azure — https://azure.microsoft.com/
-Azure Portal — https://portal.azure.com/
-Microsoft Sentinel — https://learn.microsoft.com/azure/sentinel/
-Kusto Query Language — https://learn.microsoft.com/kusto/query/
-KC7 Cyber — https://kc7cyber.com/
+
+## References
+
+- Microsoft Azure — https://azure.microsoft.com/
+- Azure Portal — https://portal.azure.com/
+- Microsoft Sentinel — https://learn.microsoft.com/azure/sentinel/
+- Kusto Query Language — https://learn.microsoft.com/kusto/query/
+- KC7 Cyber — https://kc7cyber.com/
 
 ---
