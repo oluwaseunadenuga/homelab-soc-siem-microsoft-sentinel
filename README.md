@@ -189,7 +189,7 @@ Suggested SOC Triage
 
 ---
 
-Evidence Gallery
+## Evidence Gallery
 - Evidence	Screenshot
 - Azure VM	`screenshots/01-azure-vm.png`
 - Network Security Group	`screenshots/02-network-security-group.png`
@@ -204,7 +204,7 @@ Evidence Gallery
 - Sentinel Alert	`screenshots/11-sentinel-alert.png`
 ---
 
-SOC Investigation Workflow
+## SOC Investigation Workflow
 ```text
 
 COLLECT
@@ -298,7 +298,7 @@ Azure resources can generate charges. Stop/deallocate or remove resources when t
 
 ---
 
-## 📬 Contact
+##  Contact
 
 If you have questions about this project or would like to discuss vulnerability management, Nessus, or cybersecurity more broadly:
 
