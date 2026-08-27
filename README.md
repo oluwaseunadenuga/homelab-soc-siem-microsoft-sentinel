@@ -5,16 +5,17 @@
 ![SOC](https://img.shields.io/badge/SOC-Lab-green)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-#Executive Summary
+#**Executive Summary**#
 This project demonstrates the design and implementation of a cloud-based Security Operations Centre (SOC) home lab using Microsoft Azure, Microsoft Sentinel, Log Analytics Workspace, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL and GeoIP enrichment.
 An intentionally exposed Windows honeypot was deployed to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Event ID 4625 was used as the primary detection signal for suspicious login activity.
 The investigation was extended by enriching attacker IP addresses with geographic information through a Sentinel Watchlist.
 > **Portfolio objective:** demonstrate practical SOC capabilities across telemetry collection, SIEM monitoring, detection engineering, KQL investigation, IOC analysis, enrichment and incident triage.
 ---
-Objectives
-Deploy an Azure Windows honeypot.
-Generate and observe failed authentication activity.
-Centralise Windows Security Events.
+
+**Objectives**
+# Deploy an Azure Windows honeypot#
+#Generate and observe failed authentication activity.
+#Centralise Windows Security Events.
 Configure Microsoft Sentinel as the SIEM.
 Collect telemetry using Azure Monitor Agent.
 Configure a Data Collection Rule.
@@ -24,7 +25,8 @@ Enrich IP addresses using GeoIP data.
 Develop a brute-force detection query.
 Produce a SOC-style incident investigation report.
 ---
-Architecture
+
+**Architecture**
 ```text
                          INTERNET
                             │
@@ -94,7 +96,8 @@ Microsoft Sentinel	SIEM and detection platform
 KQL	Investigation and detection
 Sentinel Watchlist	GeoIP enrichment
 ---
-🔎 Detection Scenario
+
+Detection Scenario
 Primary Detection
 Event ID 4625 — Failed Logon
 The honeypot generated failed authentication events. These events were collected into Log Analytics and investigated through Microsoft Sentinel.
