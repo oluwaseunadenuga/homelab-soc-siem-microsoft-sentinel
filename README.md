@@ -1,2 +1,313 @@
 # Homelab SOC SIEM - Live Attacker Detection with Microsoft Sentinel
 This project demonstrates a cloud-based Security Operations Center (SOC) homelab built with Microsoft Azure and Microsoft Sentinel. A deliberately exposed Windows VM acts as a honeypot, generating authentication events that are centrally collected, enriched with geographic data, and investigated through SIEM-based monitoring and KQL triage in SOCs.
+
+Homelab SOC SIEM — Live Attacker Detection
+![Azure](https://img.shields.io/badge/Microsoft%20Azure-Cloud%20Security-blue)
+![Microsoft Sentinel](https://img.shields.io/badge/Microsoft%20Sentinel-SIEM-purple)
+![KQL](https://img.shields.io/badge/KQL-Threat%20Hunting-orange)
+![SOC](https://img.shields.io/badge/SOC-Lab-green)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
+Executive Summary
+This project demonstrates the design and implementation of a cloud-based Security Operations Centre (SOC) home lab using Microsoft Azure, Microsoft Sentinel, Log Analytics Workspace, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL and GeoIP enrichment.
+An intentionally exposed Windows honeypot was deployed to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Event ID 4625 was used as the primary detection signal for suspicious login activity.
+The investigation was extended by enriching attacker IP addresses with geographic information through a Sentinel Watchlist.
+> **Portfolio objective:** demonstrate practical SOC capabilities across telemetry collection, SIEM monitoring, detection engineering, KQL investigation, IOC analysis, enrichment and incident triage.
+---
+Objectives
+Deploy an Azure Windows honeypot.
+Generate and observe failed authentication activity.
+Centralise Windows Security Events.
+Configure Microsoft Sentinel as the SIEM.
+Collect telemetry using Azure Monitor Agent.
+Configure a Data Collection Rule.
+Investigate Event ID 4625 using KQL.
+Identify high-volume source IP addresses.
+Enrich IP addresses using GeoIP data.
+Develop a brute-force detection query.
+Produce a SOC-style incident investigation report.
+---
+🏗️ Architecture
+```text
+                         INTERNET
+                            │
+                            ▼
+                    ┌──────────────┐
+                    │  Test/Threat │
+                    │    Source    │
+                    └──────┬───────┘
+                           │
+                  Failed Authentication
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ Azure Windows Honeypot  │
+              │          VM             │
+              └────────────┬────────────┘
+                           │
+                    Windows Events
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ Azure Monitor Agent    │
+              │          AMA            │
+              └────────────┬────────────┘
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ Data Collection Rule    │
+              │          DCR            │
+              └────────────┬────────────┘
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ Log Analytics Workspace │
+              │          LAW            │
+              └────────────┬────────────┘
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │   Microsoft Sentinel    │
+              │          SIEM           │
+              └────────────┬────────────┘
+                           │
+                     KQL Investigation
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ GeoIP Sentinel          │
+              │ Watchlist Enrichment    │
+              └────────────┬────────────┘
+                           │
+                           ▼
+                  Attacker Location /
+                  Investigation Context
+```
+---
+🛠️ Technology Stack
+Technology	Role
+Microsoft Azure	Cloud infrastructure
+Windows VM	Honeypot / telemetry source
+Network Security Group	Network exposure/control
+Windows Event Viewer	Local event validation
+Azure Monitor Agent	Telemetry collection
+Data Collection Rule	Collection configuration
+Log Analytics Workspace	Central log repository
+Microsoft Sentinel	SIEM and detection platform
+KQL	Investigation and detection
+Sentinel Watchlist	GeoIP enrichment
+---
+🔎 Detection Scenario
+Primary Detection
+Event ID 4625 — Failed Logon
+The honeypot generated failed authentication events. These events were collected into Log Analytics and investigated through Microsoft Sentinel.
+Key investigation fields:
+`TimeGenerated`
+`Account`
+`IpAddress`
+`Computer`
+`LogonType`
+`EventID`
+Basic Detection Query
+```kql
+SecurityEvent
+| where EventId == 4625
+| order by TimeGenerated desc
+```
+Top Source IPs
+```kql
+SecurityEvent
+| where EventId == 4625
+| summarize FailedAttempts = count() by IpAddress
+| order by FailedAttempts desc
+```
+Source IP Investigation
+```kql
+SecurityEvent
+| where IpAddress == "<ATTACKER_IP>"
+| where EventId == 4625
+| project TimeGenerated, Account, IpAddress, Computer, LogonType
+| order by TimeGenerated desc
+```
+---
+🌍 GeoIP Enrichment
+A Sentinel Watchlist named `geoip` was used to enrich source IP addresses with geographic context.
+```kql
+let GeoIPDB_FULL = _GetWatchlist("geoip");
+
+let WindowsEvents =
+    SecurityEvent
+    | where IpAddress == "<ATTACKER_IP>"
+    | where EventID == 4625
+    | order by TimeGenerated desc
+    | evaluate ipv4_lookup(
+        GeoIPDB_FULL,
+        IpAddress,
+        network
+    );
+
+WindowsEvents
+```
+Investigation Value
+GeoIP enrichment helps an analyst move from:
+Raw IP → Network → Geographic Context → Investigation
+Geographic information should be treated as contextual intelligence rather than proof of an attacker's physical location.
+---
+🚨 Detection Rule
+The following query can form the basis of a Sentinel Analytics Rule for repeated failed authentication attempts:
+```kql
+SecurityEvent
+| where EventID == 4625
+| summarize
+    FailedAttempts = count(),
+    FirstSeen = min(TimeGenerated),
+    LastSeen = max(TimeGenerated)
+    by IpAddress
+| where FailedAttempts >= 10
+| order by FailedAttempts desc
+```
+Suggested SOC Triage
+When triggered:
+Validate the source IP.
+Review the number and timing of failures.
+Identify targeted accounts.
+Check for successful authentication after failures.
+Review logon type and target host.
+Enrich the IP using threat intelligence/GeoIP.
+Determine whether the activity resembles brute force or password spraying.
+Document the investigation.
+Apply containment where appropriate.
+---
+📸 Evidence Gallery
+Replace the placeholders below with your own screenshots.
+Evidence	Screenshot
+Azure VM	`screenshots/01-azure-vm.png`
+Network Security Group	`screenshots/02-network-security-group.png`
+Event ID 4625	`screenshots/03-event-viewer-4625.png`
+Log Analytics Workspace	`screenshots/04-log-analytics-workspace.png`
+Microsoft Sentinel	`screenshots/05-microsoft-sentinel.png`
+AMA Connector	`screenshots/06-ama-connector.png`
+DCR	`screenshots/07-dcr.png`
+KQL Investigation	`screenshots/08-kql-query.png`
+Attacker IP	`screenshots/09-attacker-ip.png`
+GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`
+Sentinel Alert	`screenshots/11-sentinel-alert.png`
+---
+📊 SOC Investigation Workflow
+```text
+COLLECT
+   ↓
+DETECT
+   ↓
+TRIAGE
+   ↓
+INVESTIGATE
+   ↓
+ENRICH
+   ↓
+CORRELATE
+   ↓
+ASSESS
+   ↓
+RESPOND
+   ↓
+DOCUMENT
+```
+---
+🧠 Skills Demonstrated
+Security Operations
+SIEM monitoring
+Alert triage
+Authentication investigation
+IOC analysis
+Log analysis
+Threat detection
+Incident documentation
+Microsoft Security
+Microsoft Sentinel
+Log Analytics
+Azure Monitor Agent
+Data Collection Rules
+Sentinel Watchlists
+Detection Engineering
+KQL filtering
+Aggregation
+Threshold-based detection
+Source IP analysis
+GeoIP enrichment
+Cloud Security
+Azure VM deployment
+Network Security Groups
+Cloud logging
+Cloud SIEM architecture
+---
+📁 Repository Structure
+```text
+homelab-soc-siem/
+├── README.md
+├── architecture/
+│   └── soc-architecture.png
+├── documentation/
+│   ├── deployment.md
+│   ├── log-collection.md
+│   └── investigation.md
+├── kql/
+│   ├── failed-logins.kql
+│   ├── top-attacker-ips.kql
+│   ├── attacker-investigation.kql
+│   └── geoip-enrichment.kql
+├── detection-rules/
+│   └── brute-force-detection.kql
+├── incident-reports/
+│   └── sample-incident-report.md
+└── screenshots/
+```
+---
+📌 Key Findings
+> Complete this section using the actual results from your lab.
+Total failed authentication events: [INSERT VALUE]
+Most active source IP: [REDACTED / INSERT VALUE]
+Highest failed-attempt count: [INSERT VALUE]
+Targeted account(s): [INSERT VALUE]
+Observed attack window: [INSERT VALUE]
+GeoIP context: [INSERT VALUE]
+Initial assessment: [BRUTE FORCE / PASSWORD SPRAYING / OTHER]
+---
+🚀 Future Enhancements
+Add Microsoft Defender for Endpoint.
+Deploy Sysmon telemetry.
+Detect password spraying.
+Detect successful logins following repeated failures.
+Map detections to MITRE ATT&CK.
+Create Sentinel Workbooks.
+Add threat-intelligence feeds.
+Create automated Sentinel playbooks.
+Add automated IP reputation checks.
+Monitor PowerShell activity.
+Add Linux telemetry.
+Expand to multiple honeypots.
+---
+⚠️ Security & Cost Disclaimer
+This project is intended for educational and defensive security research.
+The honeypot is intentionally exposed for telemetry generation and must remain isolated from production systems.
+Do not store sensitive data, personal credentials, secrets, production workloads or confidential information on the honeypot.
+Azure resources can generate charges. Stop/deallocate or remove resources when the lab is not in use.
+Before publishing screenshots, redact:
+Subscription IDs
+Tenant IDs
+Personal IP addresses
+Usernames/passwords
+API keys
+Tokens
+Secrets
+Personal information
+---
+📚 References
+Microsoft Azure — https://azure.microsoft.com/
+Azure Portal — https://portal.azure.com/
+Microsoft Sentinel — https://learn.microsoft.com/azure/sentinel/
+Kusto Query Language — https://learn.microsoft.com/kusto/query/
+KC7 Cyber — https://kc7cyber.com/
+---
+⭐ Portfolio Statement
+Designed and implemented a Microsoft Azure-based SOC homelab using Microsoft Sentinel to detect and investigate suspicious Windows authentication activity. Built centralized telemetry collection with Azure Monitor Agent and Data Collection Rules, developed KQL detections for Event ID 4625, identified suspicious source IP addresses and enriched security events using Sentinel GeoIP Watchlists.
