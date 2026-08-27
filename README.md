@@ -255,32 +255,6 @@ DOCUMENT
 ![Cloud Logging](https://img.shields.io/badge/Cloud-Cloud%20Logging-0e7490?style=flat-square)
 ![Cloud SIEM Architecture](https://img.shields.io/badge/Architecture-Cloud%20SIEM%20Architecture-6f42c1?style=flat-square)
 
-- Security Operations
-- SIEM monitoring
-- Alert triage
-- Authentication investigation
-- IOC analysis
-- Log analysis
-- Threat detection
-- Incident documentation
-- Microsoft Security
-- Microsoft Sentinel
-- Log Analytics
-- Azure Monitor Agent
-- Data Collection Rules
-- Sentinel Watchlists
-- Detection Engineering
-- KQL filtering
-- Aggregation
-- Threshold-based detection
-- Source IP analysis
-- GeoIP enrichment
-- Cloud Security
-- Azure VM deployment
-- Network Security Groups
-- Cloud logging
-- Cloud SIEM architecture
-
 ---
 📁 Repository Structure
 ```text
