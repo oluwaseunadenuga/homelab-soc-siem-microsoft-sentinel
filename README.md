@@ -30,6 +30,54 @@ The investigation was extended by enriching attacker IP addresses with geographi
 
 ---
 
+## Steps
+1. Navigate to https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account
+  and create Free Azure Subscription
+2. After the subscription is created, login at: https://portal.azure.com
+3. Create a new Windows Server Honey Pot (Azure Virtual Machine)
+4. Navigate to the Network Security Group on the newly created virtual machine and create a rule that allows all traffic inbound
+5. Log into the virtual machine and turn off the windows firewall (start -> wf.msc -> properties -> all off)
+6.  Logging into the VM and inspecting logs
+7. Make a Fail 3 logins as “employee” (or some other username)
+8. Login to the virtual machine
+9. Open up Event Viewer and inspect the security logs
+10. Observe the three failed logins as “employee”, event ID 4625
+11. Create Log Analytics Workspace
+12. Create a Sentinel Instance and connect it to Log Analytics
+13. Configure the “Windows Security Events via AMA” connector
+14. Create the DCR within sentinel, watch for extension creation
+15. Query logs within the Log analytics workspace as well as the SIEM
+16. Observe some of the VM logs:
+             SecurityEvent
+             | where EventId == 4625
+17.  Check SecurityEvent logs in the Log Analytics Workspace
+18. Import a spreadsheet (as a “Sentinel Watchlist”) which contains geographic information for each block of IP addresses.
+
+19. Within Sentinel, create the watchlist:
+Name/Alias: geoip
+Source type: Local File
+Number of lines before row: 0
+Search Key: network
+20. Observe the logs now have geographic information, so you can see where the attacks are coming from
+
+let GeoIPDB_FULL = _GetWatchlist("geoip");
+let WindowsEvents = SecurityEvent
+    | where IpAddress == <attacker IP address>
+    | where EventID == 4625
+    | order by TimeGenerated desc
+    | evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network);
+WindowsEvents
+
+21. Within Sentine, create a new Workbook
+22. Delete the prepopulated elements and add a “Query” element
+23. Go to the advanced editor tab, and paste the JSON
+Workbook (Attack map):
+map.json
+24. Observe the query
+25. Observe the map settings
+26. Observe the map
+-------------
+
 ## Architecture
 ```text
                          INTERNET
