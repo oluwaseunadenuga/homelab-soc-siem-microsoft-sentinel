@@ -6,6 +6,10 @@
 ![SOC](https://img.shields.io/badge/SOC-Lab-green)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/ca59d82e-c803-4102-9694-9ea1fcf87e08" />
+
+
+
 ## Project Overview
 This project demonstrates the design and implementation of a cloud-based Security Operations Centre (SOC) home lab using Microsoft Azure, Microsoft Sentinel, Log Analytics Workspace, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL and GeoIP enrichment.
 An intentionally exposed Windows honeypot was deployed to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Event ID 4625 was used as the primary detection signal for suspicious login activity.
