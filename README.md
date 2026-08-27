@@ -136,6 +136,7 @@ SecurityEvent
 | order by TimeGenerated desc
 ```
 ---
+
 🌍 GeoIP Enrichment
 A Sentinel Watchlist named `geoip` was used to enrich source IP addresses with geographic context.
 ```kql
@@ -227,8 +228,8 @@ DOCUMENT
 
 ---
 
-🧠 Skills Demonstrated
--Security Operations
+ Skills Demonstrated
+- Security Operations
 - SIEM monitoring
 - Alert triage
 - Authentication investigation
@@ -252,7 +253,8 @@ DOCUMENT
 - Azure VM deployment
 - Network Security Groups
 - Cloud logging
-Cloud SIEM architecture
+- Cloud SIEM architecture
+
 ---
 📁 Repository Structure
 ```text
@@ -278,16 +280,15 @@ homelab-soc-siem/
 ---
 
 ## Key Findings
-
--Total failed authentication events: [INSERT VALUE]
+- Total failed authentication events: [INSERT VALUE]
 - Most active source IP: [REDACTED / INSERT VALUE]
 - Highest failed-attempt count: [INSERT VALUE]
 - Targeted account(s): [INSERT VALUE]
 - Observed attack window: [INSERT VALUE]
 - GeoIP context: [INSERT VALUE]
 - Initial assessment: [BRUTE FORCE / PASSWORD SPRAYING / OTHER]
----
 
+---
 
 ## Security & Cost Disclaimer
 This project is intended for educational and defensive security research.
