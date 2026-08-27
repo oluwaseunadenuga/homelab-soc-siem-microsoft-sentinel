@@ -159,9 +159,8 @@ The investigation was extended by enriching attacker IP addresses with geographi
  
 ---
 
-Detection Scenario
-Primary Detection
-Event ID 4625 — Failed Logon
+## Detection Scenario
+Primary Detection:Event ID 4625 — Failed Logon
 The honeypot generated failed authentication events. These events were collected into Log Analytics and investigated through Microsoft Sentinel.
 Key investigation fields:
 `TimeGenerated`
