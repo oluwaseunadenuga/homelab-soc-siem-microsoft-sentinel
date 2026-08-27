@@ -1,14 +1,11 @@
 # Homelab SOC SIEM - Live Attacker Detection with Microsoft Sentinel
-This project demonstrates a cloud-based Security Operations Center (SOC) homelab built with Microsoft Azure and Microsoft Sentinel. A deliberately exposed Windows VM acts as a honeypot, generating authentication events that are centrally collected, enriched with geographic data, and investigated through SIEM-based monitoring and KQL triage in SOCs.
-
-Homelab SOC SIEM — Live Attacker Detection
 ![Azure](https://img.shields.io/badge/Microsoft%20Azure-Cloud%20Security-blue)
 ![Microsoft Sentinel](https://img.shields.io/badge/Microsoft%20Sentinel-SIEM-purple)
 ![KQL](https://img.shields.io/badge/KQL-Threat%20Hunting-orange)
 ![SOC](https://img.shields.io/badge/SOC-Lab-green)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-Executive Summary
+#Executive Summary
 This project demonstrates the design and implementation of a cloud-based Security Operations Centre (SOC) home lab using Microsoft Azure, Microsoft Sentinel, Log Analytics Workspace, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL and GeoIP enrichment.
 An intentionally exposed Windows honeypot was deployed to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Event ID 4625 was used as the primary detection signal for suspicious login activity.
 The investigation was extended by enriching attacker IP addresses with geographic information through a Sentinel Watchlist.
@@ -27,7 +24,7 @@ Enrich IP addresses using GeoIP data.
 Develop a brute-force detection query.
 Produce a SOC-style incident investigation report.
 ---
-🏗️ Architecture
+Architecture
 ```text
                          INTERNET
                             │
@@ -84,7 +81,7 @@ Produce a SOC-style incident investigation report.
                   Investigation Context
 ```
 ---
-🛠️ Technology Stack
+Technology Stack
 Technology	Role
 Microsoft Azure	Cloud infrastructure
 Windows VM	Honeypot / telemetry source
@@ -153,7 +150,7 @@ GeoIP enrichment helps an analyst move from:
 Raw IP → Network → Geographic Context → Investigation
 Geographic information should be treated as contextual intelligence rather than proof of an attacker's physical location.
 ---
-🚨 Detection Rule
+Detection Rule
 The following query can form the basis of a Sentinel Analytics Rule for repeated failed authentication attempts:
 ```kql
 SecurityEvent
