@@ -228,7 +228,7 @@ DOCUMENT
 
 ---
 
- Skills Demonstrated
+ ## Skills Demonstrated
 - Security Operations
 - SIEM monitoring
 - Alert triage
@@ -298,12 +298,16 @@ Azure resources can generate charges. Stop/deallocate or remove resources when t
 
 ---
 
-## References
+## 📬 Contact
 
-- Microsoft Azure — https://azure.microsoft.com/
-- Azure Portal — https://portal.azure.com/
-- Microsoft Sentinel — https://learn.microsoft.com/azure/sentinel/
-- Kusto Query Language — https://learn.microsoft.com/kusto/query/
-- KC7 Cyber — https://kc7cyber.com/
+If you have questions about this project or would like to discuss vulnerability management, Nessus, or cybersecurity more broadly:
+
+- 🔗 **GitHub:** [@oluwaseunadenuga](https://github.com/oluwaseunadenuga)
+- 💼 **LinkedIn:** [linkedin.com/in/oluwaseunadenuga](https://linkedin.com/in/oluwaseunadenuga)
+- 📧 **Email:** Available via LinkedIn
+
+---
+
+<div align="center">
 
 ---
