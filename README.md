@@ -229,6 +229,31 @@ DOCUMENT
 ---
 
  ## Skills Demonstrated
+![Security Operations](https://img.shields.io/badge/Security-Security%20Operations-0075ca?style=flat-square)
+![SIEM Monitoring](https://img.shields.io/badge/SIEM-SIEM%20Monitoring-0075ca?style=flat-square)
+![Alert Triage](https://img.shields.io/badge/SOC-Alert%20Triage-0075ca?style=flat-square)
+![Authentication Investigation](https://img.shields.io/badge/Investigation-Authentication%20Investigation-e36209?style=flat-square)
+![IOC Analysis](https://img.shields.io/badge/Threat-IOC%20Analysis-e36209?style=flat-square)
+![Log Analysis](https://img.shields.io/badge/Technical-Log%20Analysis-586069?style=flat-square)
+![Threat Detection](https://img.shields.io/badge/Detection-Threat%20Detection-e36209?style=flat-square)
+![Incident Documentation](https://img.shields.io/badge/SOC-Incident%20Documentation-0075ca?style=flat-square)
+![Microsoft Security](https://img.shields.io/badge/Microsoft-Microsoft%20Security-0078d4?style=flat-square)
+![Microsoft Sentinel](https://img.shields.io/badge/Microsoft-Microsoft%20Sentinel-0078d4?style=flat-square)
+![Log Analytics](https://img.shields.io/badge/Azure-Log%20Analytics-0078d4?style=flat-square)
+![Azure Monitor Agent](https://img.shields.io/badge/Azure-Azure%20Monitor%20Agent-0078d4?style=flat-square)
+![Data Collection Rules](https://img.shields.io/badge/Azure-Data%20Collection%20Rules-0078d4?style=flat-square)
+![Sentinel Watchlists](https://img.shields.io/badge/Sentinel-Sentinel%20Watchlists-0078d4?style=flat-square)
+![Detection Engineering](https://img.shields.io/badge/Engineering-Detection%20Engineering-6f42c1?style=flat-square)
+![KQL Filtering](https://img.shields.io/badge/KQL-KQL%20Filtering-6f42c1?style=flat-square)
+![Aggregation](https://img.shields.io/badge/KQL-Aggregation-6f42c1?style=flat-square)
+![Threshold-based Detection](https://img.shields.io/badge/Detection-Threshold--based%20Detection-e36209?style=flat-square)
+![Source IP Analysis](https://img.shields.io/badge/Analysis-Source%20IP%20Analysis-586069?style=flat-square)
+![GeoIP Enrichment](https://img.shields.io/badge/Analysis-GeoIP%20Enrichment-586069?style=flat-square)
+![Cloud Security](https://img.shields.io/badge/Cloud-Cloud%20Security-0e7490?style=flat-square)
+![Azure VM Deployment](https://img.shields.io/badge/Azure-Azure%20VM%20Deployment-0078d4?style=flat-square)
+![Network Security Groups](https://img.shields.io/badge/Azure-Network%20Security%20Groups-0078d4?style=flat-square)
+![Cloud Logging](https://img.shields.io/badge/Cloud-Cloud%20Logging-0e7490?style=flat-square)
+![Cloud SIEM Architecture](https://img.shields.io/badge/Architecture-Cloud%20SIEM%20Architecture-6f42c1?style=flat-square)
 
 - Security Operations
 - SIEM monitoring
