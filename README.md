@@ -48,31 +48,32 @@ The investigation was extended by enriching attacker IP addresses with geographi
 14. Create the DCR within sentinel, watch for extension creation
 15. Query logs within the Log analytics workspace as well as the SIEM
 16. Observe some of the VM logs:
-             SecurityEvent
-             | where EventId == 4625
+             - SecurityEvent
+             -  | where EventId == 4625
 17.  Check SecurityEvent logs in the Log Analytics Workspace
 18. Import a spreadsheet (as a “Sentinel Watchlist”) which contains geographic information for each block of IP addresses.
 
 19. Within Sentinel, create the watchlist:
-Name/Alias: geoip
-Source type: Local File
-Number of lines before row: 0
-Search Key: network
-20. Observe the logs now have geographic information, so you can see where the attacks are coming from
+- Name/Alias: geoip
+- Source type: Local File
+- Number of lines before row: 0
+-Search Key: network
 
-let GeoIPDB_FULL = _GetWatchlist("geoip");
-let WindowsEvents = SecurityEvent
-    | where IpAddress == <attacker IP address>
-    | where EventID == 4625
-    | order by TimeGenerated desc
-    | evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network);
-WindowsEvents
+20. Observe the logs now have geographic information, so you can see where the attacks are coming from
+- let GeoIPDB_FULL = _GetWatchlist("geoip");
+- let WindowsEvents = SecurityEvent
+    -| where IpAddress == <attacker IP address>
+    -| where EventID == 4625
+    - | order by TimeGenerated desc
+    - | evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network);
+ - WindowsEvents
 
 21. Within Sentine, create a new Workbook
 22. Delete the prepopulated elements and add a “Query” element
 23. Go to the advanced editor tab, and paste the JSON
-Workbook (Attack map):
-map.json
+- Workbook (Attack map):
+- map.json
+
 24. Observe the query
 25. Observe the map settings
 26. Observe the map
