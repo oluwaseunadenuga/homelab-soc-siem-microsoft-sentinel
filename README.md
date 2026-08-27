@@ -230,20 +230,6 @@ SecurityEvent
 | order by FailedAttempts desc
 ```
 
-Suggested SOC Triage
-- When triggered:
-- Validate the source IP.
-- Review the number and timing of failures.
-- Identify targeted accounts.
-- Check for successful authentication after failures.
-- Review logon type and target host.
-- Enrich the IP using threat intelligence/GeoIP.
-- Determine whether the activity resembles brute force or password spraying.
-- Document the investigation.
-- Apply containment where appropriate.
-
----
-
 ## Evidence Gallery
 Evidence	Screenshot
 - Azure Virtual Network <img width="1916" height="982" alt="Virtual Network created" src="https://github.com/user-attachments/assets/6ca9b7dd-01ac-4085-8f5a-612b377cdd2e" />
@@ -342,5 +328,4 @@ If you have questions about this project or would like to discuss vulnerability 
 
 <div align="center">
 
----
-Add your SOC architecture diagram here as `soc-architecture.png`.
+
