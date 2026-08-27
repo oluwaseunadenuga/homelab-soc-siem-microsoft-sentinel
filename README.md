@@ -246,14 +246,11 @@ Suggested SOC Triage
 ---
 
 ## Evidence Gallery
-- Evidence	Screenshot
+Evidence	Screenshot
 - Azure Virtual Network <img width="1916" height="982" alt="Virtual Network created" src="https://github.com/user-attachments/assets/6ca9b7dd-01ac-4085-8f5a-612b377cdd2e" />
 - Azure VM	<img width="1992" height="968" alt="image" src="https://github.com/user-attachments/assets/63abbf95-6318-4479-a118-19e2d5cf88f2" />
-- Event ID 4625	`screenshots/03-event-viewer-4625.png`
 - Log Analytics Workspace	`<img width="1738" height="973" alt="image" src="https://github.com/user-attachments/assets/125a0fc0-d4f5-4f93-83ef-5d3fa6081633" />
-- Microsoft Sentinel	`screenshots/05-microsoft-sentinel.png`
-- AMA Connector	`screenshots/06-ama-connector.png`
-- DCR	`screenshots/07-dcr.png`
+- Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
 - KQL Investigation	<img width="1999" height="981" alt="image" src="https://github.com/user-attachments/assets/5184ee2b-c7a9-4853-aef2-737d221c5f77" />
 - Attacker IP	`<img width="1999" height="981" alt="image" src="https://github.com/user-attachments/assets/bb138135-69c2-4cf5-ab7a-5c0661ecd636" />
 - Attacker Failed Attempts	<img width="1910" height="1023" alt="Failed Attempts" src="https://github.com/user-attachments/assets/2026daae-02d9-42c1-8ba9-64274f39c4b3" />
@@ -261,28 +258,6 @@ Suggested SOC Triage
 - GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`
 - Sentinel Alert	`screenshots/11-sentinel-alert.png`
 ---
-
-## SOC Investigation Workflow
-```text
-
-COLLECT
-   ↓
-DETECT
-   ↓
-TRIAGE
-   ↓
-INVESTIGATE
-   ↓
-ENRICH
-   ↓
-CORRELATE
-   ↓
-ASSESS
-   ↓
-RESPOND
-   ↓
-DOCUMENT
-```
 
 ---
 
