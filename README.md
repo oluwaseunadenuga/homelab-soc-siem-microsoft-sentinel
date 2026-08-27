@@ -16,17 +16,17 @@ The investigation was extended by enriching attacker IP addresses with geographi
 ---
 
 ## Objectives
-- [Deploy an Azure Windows honeypot]
-- [Generate and observe failed authentication activity]
-- [Centralise Windows Security Events]
-- [Configure Microsoft Sentinel as the SIEM]
-- [Collect telemetry using Azure Monitor Agent]
-- [Configure a Data Collection Rule]
-- [Investigate Event ID 4625 using KQL]
-- [Identify high-volume source IP addresses]
-- [Enrich IP addresses using GeoIP data]
-- [Develop a brute-force detection query]
-- [Produce a SOC-style incident investigation report]
+- Deploy an Azure Windows honeypot
+- Generate and observe failed authentication activity
+- Centralise Windows Security Events
+- Configure Microsoft Sentinel as the SIEM
+- Collect telemetry using Azure Monitor Agent
+- Configure a Data Collection Rule
+- Investigate Event ID 4625 using KQL
+- Identify high-volume source IP addresses
+- Enrich IP addresses using GeoIP data
+- Develop a brute-force detection query
+- Produce a SOC-style incident investigation report
 
 ---
 
@@ -89,17 +89,18 @@ The investigation was extended by enriching attacker IP addresses with geographi
 ---
 
 ## Technology Stack
-- [Technology	Role]
-- [Microsoft Azure	Cloud infrastructure]
-- [Windows VM	Honeypot / telemetry source]
-- [Network Security Group	Network exposure/control]
-- [Windows Event Viewer	Local event validation]
-- [Azure Monitor Agent	Telemetry collection]
-- [Data Collection Rule	Collection configuration]
-- [Log Analytics Workspace	Central log repository]
-- [Microsoft Sentinel	SIEM and detection platform]
-- [KQL	Investigation and detection]
-- [Sentinel Watchlist	GeoIP enrichment]
+- Technology	Role
+- Microsoft Azure	Cloud infrastructure
+- Windows VM	Honeypot / telemetry source
+- Network Security Group	Network exposure/control
+- Windows Event Viewer	Local event validation
+- Azure Monitor Agent	Telemetry collection
+- Data Collection Rule	Collection configuration
+- Log Analytics Workspace	Central log repository
+- Microsoft Sentinel	SIEM and detection platform
+- KQL	Investigation and detection
+- Sentinel Watchlist	GeoIP enrichment
+ 
 ---
 
 Detection Scenario
@@ -186,18 +187,18 @@ Apply containment where appropriate.
 ---
 
 📸 Evidence Gallery
-- [Evidence	Screenshot]
-- [ Azure VM	`screenshots/01-azure-vm.png`]
-- [Network Security Group	`screenshots/02-network-security-group.png`]
-- [Event ID 4625	`screenshots/03-event-viewer-4625.png`]
-- [Log Analytics Workspace	`screenshots/04-log-analytics-workspace.png`]
-- [Microsoft Sentinel	`screenshots/05-microsoft-sentinel.png`]
-- [AMA Connector	`screenshots/06-ama-connector.png`]
-- [DCR	`screenshots/07-dcr.png`]
-- [KQL Investigation	`screenshots/08-kql-query.png`]
-- [Attacker IP	`screenshots/09-attacker-ip.png`]
-- [GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`]
-- [ Sentinel Alert	`screenshots/11-sentinel-alert.png`]
+- Evidence	Screenshot
+- Azure VM	`screenshots/01-azure-vm.png`
+- Network Security Group	`screenshots/02-network-security-group.png`
+- Event ID 4625	`screenshots/03-event-viewer-4625.png`
+- Log Analytics Workspace	`screenshots/04-log-analytics-workspace.png`
+- Microsoft Sentinel	`screenshots/05-microsoft-sentinel.png`
+- AMA Connector	`screenshots/06-ama-connector.png`
+- DCR	`screenshots/07-dcr.png`
+- KQL Investigation	`screenshots/08-kql-query.png`
+- Attacker IP	`screenshots/09-attacker-ip.png`
+- GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`
+- Sentinel Alert	`screenshots/11-sentinel-alert.png`
 ---
 
 📊 SOC Investigation Workflow
