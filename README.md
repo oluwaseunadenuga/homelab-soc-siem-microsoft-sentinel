@@ -13,21 +13,26 @@
 This project demonstrates the design and implementation of a cloud-based Security Operations Centre (SOC) home lab using Microsoft Azure, Microsoft Sentinel, Log Analytics Workspace, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL and GeoIP enrichment.
 An intentionally exposed Windows honeypot was deployed to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Event ID 4625 was used as the primary detection signal for suspicious login activity.
 The investigation was extended by enriching attacker IP addresses with geographic information through a Sentinel Watchlist.
-> **Portfolio objective:** demonstrate practical SOC capabilities across telemetry collection, SIEM monitoring, detection engineering, KQL investigation, IOC analysis, enrichment and incident triage.
 
 ---
 
 ## Objectives
+- Demonstrate practical SOC capabilities across telemetry collection
 - Deploy an Azure Windows honeypot
 - Generate and observe failed authentication activity
-- Centralise Windows Security Events
+- Centralise Windows Security Eventsn
 - Configure Microsoft Sentinel as the SIEM
 - Collect telemetry using Azure Monitor Agent
 - Configure a Data Collection Rule
+- SIEM monitoring
+- Detection engineering
+- KQL investigation
 - Investigate Event ID 4625 using KQL
 - Identify high-volume source IP addresses
 - Enrich IP addresses using GeoIP data
 - Develop a brute-force detection query
+-  IOC analysis
+-  Enrichment and incident triage.
 - Produce a SOC-style incident investigation report
 
 ---
