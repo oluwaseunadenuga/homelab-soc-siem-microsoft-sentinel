@@ -82,9 +82,6 @@ The investigation was extended by enriching attacker IP addresses with geographi
 -------------
 
 ## Architecture
-<img width="908" height="501" alt="image" src="https://github.com/user-attachments/assets/7c665708-719b-4bb5-98e8-fbb8b757bd86" />
-
-
 ```text
                          INTERNET
                             │
