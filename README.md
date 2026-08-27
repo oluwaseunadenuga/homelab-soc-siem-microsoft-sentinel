@@ -239,7 +239,7 @@ Evidence	Screenshot
 - KQL Investigation	<img width="1999" height="981" alt="image" src="https://github.com/user-attachments/assets/5184ee2b-c7a9-4853-aef2-737d221c5f77" />
 - Attacker IP	`<img width="1999" height="981" alt="image" src="https://github.com/user-attachments/assets/bb138135-69c2-4cf5-ab7a-5c0661ecd636" />
 - Attacker Failed Attempts	<img width="1910" height="1023" alt="Failed Attempts" src="https://github.com/user-attachments/assets/2026daae-02d9-42c1-8ba9-64274f39c4b3" />
-- Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
+- SigninLogs in Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
 - GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`
 - Sentinel Alert	`screenshots/11-sentinel-alert.png`
 ---
