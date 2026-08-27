@@ -50,8 +50,8 @@ The investigation was extended by enriching attacker IP addresses with geographi
 14. Create the DCR within sentinel, watch for extension creation
 15. Query logs within the Log analytics workspace as well as the SIEM
 16. Observe some of the VM logs:
-             - SecurityEvent
-             -  | where EventId == 4625
+- SecurityEvent
+-  | where EventId == 4625
 17.  Check SecurityEvent logs in the Log Analytics Workspace
 18. Import a spreadsheet (as a “Sentinel Watchlist”) which contains geographic information for each block of IP addresses.
 
@@ -82,6 +82,9 @@ The investigation was extended by enriching attacker IP addresses with geographi
 -------------
 
 ## Architecture
+<img width="908" height="501" alt="image" src="https://github.com/user-attachments/assets/7c665708-719b-4bb5-98e8-fbb8b757bd86" />
+
+
 ```text
                          INTERNET
                             │
