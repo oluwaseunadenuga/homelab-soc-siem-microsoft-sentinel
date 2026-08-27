@@ -230,19 +230,6 @@ DOCUMENT
 
  ## Skills Demonstrated
 
- ![Vulnerability Assessment](https://img.shields.io/badge/Technical-Vulnerability%20Assessment-2ea44f?style=flat-square)
-![Nessus](https://img.shields.io/badge/Tool-Nessus%20Essentials-2ea44f?style=flat-square)
-![Scan Config](https://img.shields.io/badge/Technical-Scan%20Scoping%20%26%20Configuration-0075ca?style=flat-square)
-![CVE](https://img.shields.io/badge/Technical-CVE%20Identification%20%26%20Analysis-0075ca?style=flat-square)
-![CSV Export](https://img.shields.io/badge/Technical-Findings%20Export%20%28CSV%29-0075ca?style=flat-square)
-![Data Structure](https://img.shields.io/badge/Technical-Data%20Structuring%20%26%20Normalisation-586069?style=flat-square)
-![Prioritisation](https://img.shields.io/badge/GRC-Risk--Based%20Prioritisation-6f42c1?style=flat-square)
-![Severity](https://img.shields.io/badge/GRC-Severity%20Classification-6f42c1?style=flat-square)
-![Exploitability](https://img.shields.io/badge/GRC-Exploitability%20Analysis-6f42c1?style=flat-square)
-![Remediation](https://img.shields.io/badge/Soft%20Skill-Remediation%20Reporting-e36209?style=flat-square)
-![Handoff](https://img.shields.io/badge/Soft%20Skill-IT%20Team%20Handoff-e36209?style=flat-square)
-![VM Lifecycle](https://img.shields.io/badge/Technical-Vulnerability%20Management%20Lifecycle-0075ca?style=flat-square)
-
 - Security Operations
 - SIEM monitoring
 - Alert triage
