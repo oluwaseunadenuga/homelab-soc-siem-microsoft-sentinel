@@ -305,10 +305,10 @@ homelab-soc-siem/
   Администратор (Cyrillic for "Administrator") — 55 attempts, all from 91.135.255.108
 Гость (Cyrillic for "Guest") — 55 attempts, all from 91.135.255.108
 mulan-window120\NOUSER — 132 attempts (no source IP logged, shown as -)
-746 events logged an account value of literal #NAME? — this is an Excel formula-error artifact, not an attacker-controlled value. It indicates the original account-name field was corrupted (likely a leading character like =/- that Excel misinterpreted as a formula) during export/spreadsheet handling, so the real usernames behind these 746 events are unrecoverable from this file as given.
+746 events logged an account value of literal #NAME? 
 A handful of fragment-like accounts (записи, пользователей, для — 4 each) also traced back exclusively to 91.135.255.108, and appear to be fragments of a longer Cyrillic phrase/username that was truncated or split during logging
 - Observed attack window:2026-08-14, 15:31:01 – 17:11:19 UTC (~100 minutes total), all on a single day/single host (mulan-window120).
-- GeoIP context:  436 unique source IPs total. Excluding the dominant IP, 435 distinct IPs made only 764 attempts between them (mostly 1–6 each) — a wide, dispersed set of addresses (spanning Asia-Pacific, Europe, Africa, and North/South America ranges, several from cloud-hosting blocks), consistent with distributed/botnet infrastructure.
+- GeoIP context:436 unique source IPs total. Excluding the dominant IP, 435 distinct IPs made only 764 attempts between them (mostly 1–6 each) — a wide, dispersed set of addresses (spanning Asia-Pacific, Europe, Africa, and North/South America ranges, several from cloud-hosting blocks), consistent with distributed/botnet infrastructure.
 - Initial assessment: HYBRID — BRUTE FORCE (primary) + PASSWORD SPRAYING (secondary)
 
 ## Security & Cost Disclaimer
