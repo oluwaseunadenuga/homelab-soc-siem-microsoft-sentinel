@@ -1,1 +1,0 @@
-Replace this placeholder with: 02-network-security-group.png
