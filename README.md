@@ -230,7 +230,7 @@ SecurityEvent
 | order by FailedAttempts desc
 
 
-```
+```kql
 SecurityEvent
 | where TimeGenerated > ago(24h)
 | where EventID == 4625
