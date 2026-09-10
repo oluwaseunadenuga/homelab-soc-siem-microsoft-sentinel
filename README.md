@@ -228,7 +228,34 @@ SecurityEvent
     by IpAddress
 | where FailedAttempts >= 10
 | order by FailedAttempts desc
+
+
 ```
+## Failed Logon Attack Map
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| where EventID == 4625
+| where isnotempty(IpAddress)
+| extend geo = geo_info_from_ip_address(IpAddress)
+| extend latitude = toreal(geo.latitude),
+         longitude = toreal(geo.longitude),
+         cityname = tostring(geo.city),
+         countryname = tostring(geo.country)
+| where isnotempty(latitude) and isnotempty(longitude)
+| summarize FailureCount = count(), 
+            TargetAccounts = dcount(TargetAccount) 
+         by IpAddress, cityname, countryname, latitude, longitude
+| extend MapLabel = strcat(cityname, ", ", countryname, " — ", FailureCount, " failed logons (", TargetAccounts, " targets)")
+| project latitude, longitude, MapLabel, FailureCount, TargetAccounts, IpAddress, cityname, countryname
+| order by FailureCount desc
+Map Visualization Settings
+Visualization: Select Map.
+Latitude Field: latitude
+Longitude Field: longitude
+Size Settings: FailureCount (Aggregation: Sum)
+Label Settings: MapLabel
+Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
+
 
 ## Evidence Gallery
 Evidence	Screenshot
@@ -241,7 +268,9 @@ Evidence	Screenshot
 - Attacker Failed Attempts	<img width="1910" height="1023" alt="Failed Attempts" src="https://github.com/user-attachments/assets/2026daae-02d9-42c1-8ba9-64274f39c4b3" />
 - SigninLogs in Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
 - GeoIP Enrichment	`screenshots/10-geoip-enrichment.png`
-- Sentinel Alert	`screenshots/11-sentinel-alert.png`
+-Failed Logon Attack Map (Event ID 4625) `<img width="1999" height="1006" alt="image" src="https://github.com/user-attachments/assets/7c682131-5234-435d-8e41-048afe5c4d70" />
+
+- 
 ---
 
 ---
