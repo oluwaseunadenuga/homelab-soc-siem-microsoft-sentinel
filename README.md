@@ -274,7 +274,7 @@ Evidence	Screenshot
 - Size Settings: FailureCount (Aggregation: Sum)
 - Label Settings: MapLabel
 - Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
-- 
+
 ---
 
 ---
