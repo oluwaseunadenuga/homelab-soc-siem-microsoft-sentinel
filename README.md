@@ -231,7 +231,6 @@ SecurityEvent
 
 
 ```
-## Failed Logon Attack Map
 SecurityEvent
 | where TimeGenerated > ago(24h)
 | where EventID == 4625
