@@ -250,7 +250,7 @@ SecurityEvent
 | order by FailureCount desc
 
 -Map Visualisation Settings
--Visualization: Select Map.
+-Visualisation: Select Map.
 -Latitude Field: latitude
 -Longitude Field: longitude
 -Size Settings: FailureCount (Aggregation: Sum)
@@ -270,11 +270,17 @@ Evidence	Screenshot
 - Attacker Failed Attempts	<img width="1910" height="1023" alt="Failed Attempts" src="https://github.com/user-attachments/assets/2026daae-02d9-42c1-8ba9-64274f39c4b3" />
 - SigninLogs in Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
 - GeoIP Enrichment	`<img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/c6fe7855-4c82-43fa-8fb5-aaec6fc7cfd4" />
-- Microsoft Defender for Endpoint: Advance Hunting `<img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/139c49ae-cb0c-4568-9e9e-ff3be1b6cff8" />
+- Microsoft Defender for Endpoint: Advance Hunting `<img width="2003" height="1125" alt="image" src="https://github.com/user-attachments/assets/7eaf7fb4-f419-453f-8715-98ef8ecae15a" />
 - Advance Hunting <img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/f8d3904e-1d7f-46b8-9646-73573372a1c9" />
-
 -Failed Logon Attack Map (Event ID 4625) `<img width="1999" height="1006" alt="image" src="https://github.com/user-attachments/assets/7c682131-5234-435d-8e41-048afe5c4d70" />
 
+-Map Visualisation Settings
+-Visualisation: Select Map.
+-Latitude Field: latitude
+-Longitude Field: longitude
+-Size Settings: FailureCount (Aggregation: Sum)
+-Label Settings: MapLabel
+-Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
 - 
 ---
 
