@@ -248,13 +248,15 @@ SecurityEvent
 | extend MapLabel = strcat(cityname, ", ", countryname, " — ", FailureCount, " failed logons (", TargetAccounts, " targets)")
 | project latitude, longitude, MapLabel, FailureCount, TargetAccounts, IpAddress, cityname, countryname
 | order by FailureCount desc
-Map Visualization Settings
-Visualization: Select Map.
-Latitude Field: latitude
-Longitude Field: longitude
-Size Settings: FailureCount (Aggregation: Sum)
-Label Settings: MapLabel
-Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
+
+-Map Visualisation Settings
+-Visualization: Select Map.
+-Latitude Field: latitude
+-Longitude Field: longitude
+-Size Settings: FailureCount (Aggregation: Sum)
+-Label Settings: MapLabel
+-Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
+-------------
 
 
 ## Evidence Gallery
@@ -269,6 +271,8 @@ Evidence	Screenshot
 - SigninLogs in Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
 - GeoIP Enrichment	`<img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/c6fe7855-4c82-43fa-8fb5-aaec6fc7cfd4" />
 - Microsoft Defender for Endpoint: Advance Hunting `<img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/139c49ae-cb0c-4568-9e9e-ff3be1b6cff8" />
+- Advance Hunting <img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/f8d3904e-1d7f-46b8-9646-73573372a1c9" />
+
 -Failed Logon Attack Map (Event ID 4625) `<img width="1999" height="1006" alt="image" src="https://github.com/user-attachments/assets/7c682131-5234-435d-8e41-048afe5c4d70" />
 
 - 
