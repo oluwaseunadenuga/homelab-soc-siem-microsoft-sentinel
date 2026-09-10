@@ -249,13 +249,6 @@ SecurityEvent
 | project latitude, longitude, MapLabel, FailureCount, TargetAccounts, IpAddress, cityname, countryname
 | order by FailureCount desc
 
--Map Visualisation Settings
--Visualisation: Select Map.
--Latitude Field: latitude
--Longitude Field: longitude
--Size Settings: FailureCount (Aggregation: Sum)
--Label Settings: MapLabel
--Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
 -------------
 
 
@@ -274,13 +267,13 @@ Evidence	Screenshot
 - Advance Hunting <img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/f8d3904e-1d7f-46b8-9646-73573372a1c9" />
 -Failed Logon Attack Map (Event ID 4625) `<img width="1999" height="1006" alt="image" src="https://github.com/user-attachments/assets/7c682131-5234-435d-8e41-048afe5c4d70" />
 
--Map Visualisation Settings
--Visualisation: Select Map.
--Latitude Field: latitude
--Longitude Field: longitude
--Size Settings: FailureCount (Aggregation: Sum)
--Label Settings: MapLabel
--Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
+- Map Visualisation Settings
+- Visualisation: Select Map.
+- Latitude Field: latitude
+- Longitude Field: longitude
+- Size Settings: FailureCount (Aggregation: Sum)
+- Label Settings: MapLabel
+- Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
 - 
 ---
 
