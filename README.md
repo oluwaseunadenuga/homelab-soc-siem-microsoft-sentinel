@@ -1,4 +1,4 @@
-# Homelab SOC SIEM - Live Attacker Detection with Microsoft Sentinel & Microsoft Defender
+# Homelab SOC SIEM — Microsoft Sentinel & Microsoft Defender
 
 ![Azure](https://img.shields.io/badge/Microsoft%20Azure-Cloud%20Security-blue)
 ![Microsoft Sentinel](https://img.shields.io/badge/Microsoft%20Sentinel-SIEM-purple)
@@ -6,122 +6,76 @@
 ![SOC](https://img.shields.io/badge/SOC-Lab-green)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/ca59d82e-c803-4102-9694-9ea1fcf87e08" />
-
+<img width="940" height="529" alt="Microsoft Sentinel SOC lab overview" src="https://github.com/user-attachments/assets/ca59d82e-c803-4102-9694-9ea1fcf87e08" />
 
 ## Project Overview
+
 This project demonstrates the design and implementation of a cloud-based Security Operations Centre (SOC) home lab using Microsoft Azure, Microsoft Sentinel, Log Analytics Workspace, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL and GeoIP enrichment.
-An intentionally exposed Windows honeypot was deployed to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Event ID 4625 was used as the primary detection signal for suspicious login activity.
-The investigation was extended by enriching attacker IP addresses with geographic information through a Sentinel Watchlist.
+
+An intentionally exposed Windows honeypot was deployed in an isolated lab environment to generate authentication telemetry. Failed authentication events were collected centrally and investigated through Microsoft Sentinel. Windows Event ID **4625** was used as the primary detection signal for suspicious failed logon activity.
+
+The investigation was extended by enriching source IP addresses with geographic context using a Microsoft Sentinel Watchlist and presenting the results through KQL-based visualisation.
+
+> **Lab safety:** This is an educational defensive-security lab. The honeypot should be isolated from production systems and must not contain sensitive information, production credentials or confidential data.
 
 ---
 
 ## Objectives
-- Demonstrate practical SOC capabilities across telemetry collection
-- Deploy an Azure Windows honeypot
-- Generate and observe failed authentication activity
-- Centralise Windows Security Eventsn
-- Configure Microsoft Sentinel as the SIEM
-- Collect telemetry using Azure Monitor Agent
-- Configure a Data Collection Rule
-- SIEM monitoring
-- Detection engineering
-- KQL investigation
-- Investigate Event ID 4625 using KQL
-- Identify high-volume source IP addresses
-- Enrich IP addresses using GeoIP data
-- Develop a brute-force detection query
--  IOC analysis
--  Enrichment and incident triage.
-- Produce a SOC-style incident investigation report
+
+- Deploy an Azure Windows honeypot for security telemetry generation.
+- Configure Azure networking and Network Security Group controls.
+- Validate Windows Security Event ID 4625 locally.
+- Centralise Windows security telemetry in Log Analytics.
+- Configure Microsoft Sentinel as the SIEM platform.
+- Configure Azure Monitor Agent (AMA) and a Data Collection Rule (DCR).
+- Investigate failed authentication activity using KQL.
+- Identify high-volume source IP addresses.
+- Enrich IP addresses using a Sentinel GeoIP Watchlist.
+- Develop a threshold-based brute-force detection query.
+- Perform IOC and source-IP analysis.
+- Visualise failed logon activity geographically.
+- Document findings in a SOC-style investigation.
 
 ---
 
-## Steps
-1. Navigate to https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account
-  and create Free Azure Subscription
-2. After the subscription is created, login at: https://portal.azure.com
-3. Create a new Windows Server Honey Pot (Azure Virtual Machine)
-4. Navigate to the Network Security Group on the newly created virtual machine and create a rule that allows all traffic inbound
-5. Log into the virtual machine and turn off the windows firewall (start -> wf.msc -> properties -> all off)
-6.  Logging into the VM and inspecting logs
-7. Make a Fail 3 logins as “employee” (or some other username)
-8. Login to the virtual machine
-9. Open up Event Viewer and inspect the security logs
-10. Observe the three failed logins as “employee”, event ID 4625
-11. Create Log Analytics Workspace
-12. Create a Sentinel Instance and connect it to Log Analytics
-13. Configure the “Windows Security Events via AMA” connector
-14. Create the DCR within sentinel, watch for extension creation
-15. Query logs within the Log analytics workspace as well as the SIEM
-16. Observe some of the VM logs:
-- SecurityEvent
--  | where EventId == 4625
-17.  Check SecurityEvent logs in the Log Analytics Workspace
-18. Import a spreadsheet (as a “Sentinel Watchlist”) which contains geographic information for each block of IP addresses.
-
-19. Within Sentinel, create the watchlist:
-- Name/Alias: geoip
-- Source type: Local File
-- Number of lines before row: 0
--Search Key: network
-
-20. Observe the logs now have geographic information, so you can see where the attacks are coming from
-- let GeoIPDB_FULL = _GetWatchlist("geoip");
-- let WindowsEvents = SecurityEvent
-- | where IpAddress == <attacker IP address>
-- | where EventID == 4625
-- | order by TimeGenerated desc
-- | evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network);
- - WindowsEvents
-
-21. Within Sentine, create a new Workbook
-22. Delete the prepopulated elements and add a “Query” element
-23. Go to the advanced editor tab, and paste the JSON
-- Workbook (Attack map):
-- map.json
-
-24. Observe the query
-25. Observe the map settings
-26. Observe the map
--------------
-
 ## Architecture
+
 ```text
                          INTERNET
                             │
                             ▼
-                    ┌──────────────┐
-                    │  Test/Threat │
-                    │    Source    │
-                    └──────┬───────┘
-                           │
-                  Failed Authentication
-                           │
-                           ▼
+                 ┌─────────────────────┐
+                 │  Test / Threat      │
+                 │      Source         │
+                 └──────────┬──────────┘
+                            │
+                   Failed Authentication
+                            │
+                            ▼
               ┌─────────────────────────┐
-              │ Azure Windows Honeypot  │
-              │          VM             │
+              │  Azure Windows Honeypot │
+              │           VM            │
               └────────────┬────────────┘
                            │
-                    Windows Events
+                    Windows Security
+                        Events
                            │
                            ▼
               ┌─────────────────────────┐
-              │ Azure Monitor Agent    │
+              │   Azure Monitor Agent   │
               │          AMA            │
               └────────────┬────────────┘
                            │
                            ▼
               ┌─────────────────────────┐
-              │ Data Collection Rule    │
+              │   Data Collection Rule  │
               │          DCR            │
               └────────────┬────────────┘
                            │
                            ▼
               ┌─────────────────────────┐
-              │ Log Analytics Workspace │
-              │          LAW            │
+              │   Log Analytics         │
+              │      Workspace           │
               └────────────┬────────────┘
                            │
                            ▼
@@ -134,55 +88,109 @@ The investigation was extended by enriching attacker IP addresses with geographi
                            │
                            ▼
               ┌─────────────────────────┐
-              │ GeoIP Sentinel          │
+              │ Sentinel GeoIP          │
               │ Watchlist Enrichment    │
               └────────────┬────────────┘
                            │
                            ▼
-                  Attacker Location /
-                  Investigation Context
+                 Investigation Context
+                 / Attack Map
 ```
+
 ---
 
 ## Technology Stack
-- Technology	Role
-- Microsoft Azure	Cloud infrastructure
-- Windows VM	Honeypot / telemetry source
-- Network Security Group	Network exposure/control
-- Windows Event Viewer	Local event validation
-- Azure Monitor Agent	Telemetry collection
-- Data Collection Rule	Collection configuration
-- Log Analytics Workspace	Central log repository
-- Microsoft Sentinel	SIEM and detection platform
-- KQL	Investigation and detection
-- Sentinel Watchlist	GeoIP enrichment
- 
+
+| Technology | Role |
+|---|---|
+| Microsoft Azure | Cloud infrastructure |
+| Azure Virtual Network | Network infrastructure |
+| Windows Server VM | Honeypot / telemetry source |
+| Network Security Group | Network exposure and access control |
+| Windows Event Viewer | Local event validation |
+| Azure Monitor Agent | Telemetry collection |
+| Data Collection Rule | Telemetry collection configuration |
+| Log Analytics Workspace | Central log repository |
+| Microsoft Sentinel | SIEM, detection and investigation |
+| KQL | Detection, investigation and threat hunting |
+| Sentinel Watchlist | GeoIP enrichment |
+| Microsoft Defender for Endpoint | Advanced hunting and endpoint telemetry |
+| Sentinel Workbook | Data visualisation and attack-map presentation |
+
+---
+
+## Lab Implementation
+
+### 1. Azure Environment
+
+1. Create an Azure subscription suitable for the lab.
+2. Sign in to the [Azure Portal](https://portal.azure.com/).
+3. Create the required resource group and virtual network.
+4. Deploy the Windows Server virtual machine.
+5. Configure the Network Security Group specifically for the isolated lab.
+
+> **Security note:** Do not expose a honeypot to the public internet without understanding the associated risks. Use an isolated lab environment and restrict management access wherever possible.
+
+### 2. Validate Windows Security Events
+
+After generating controlled failed logon attempts, use Windows Event Viewer to validate Event ID **4625**.
+
+The event provides useful investigation fields including:
+
+- TimeGenerated
+- Account
+- IpAddress
+- Computer
+- LogonType
+- EventID
+
+### 3. Log Analytics and Microsoft Sentinel
+
+1. Create a Log Analytics Workspace.
+2. Create a Microsoft Sentinel instance and connect it to the workspace.
+3. Configure the **Windows Security Events via AMA** connector.
+4. Create/configure the Data Collection Rule.
+5. Confirm that Windows Security Events are arriving in Log Analytics.
+6. Validate the telemetry in Microsoft Sentinel.
+
+### 4. GeoIP Enrichment
+
+A Sentinel Watchlist named `geoip` was used to associate source IP addresses with network/geographic information.
+
+**Watchlist configuration:**
+
+- **Name / Alias:** `geoip`
+- **Source type:** Local File
+- **Header rows:** 0
+- **Search Key:** `network`
+
 ---
 
 ## Detection Scenario
-Primary Detection:Event ID 4625 — Failed Logon
-The honeypot generated failed authentication events. These events were collected into Log Analytics and investigated through Microsoft Sentinel.
-Key investigation fields:
-`TimeGenerated`
-`Account`
-`IpAddress`
-`Computer`
-`LogonType`
-`EventID`
-Basic Detection Query
+
+### Primary Detection — Windows Event ID 4625
+
+Event ID **4625** represents a failed logon attempt and was used as the primary signal for this investigation.
+
+### Basic Detection Query
+
 ```kql
 SecurityEvent
 | where EventId == 4625
 | order by TimeGenerated desc
 ```
-Top Source IPs
+
+### Top Source IPs
+
 ```kql
 SecurityEvent
 | where EventId == 4625
 | summarize FailedAttempts = count() by IpAddress
 | order by FailedAttempts desc
 ```
-Source IP Investigation
+
+### Source IP Investigation
+
 ```kql
 SecurityEvent
 | where IpAddress == "<ATTACKER_IP>"
@@ -190,10 +198,13 @@ SecurityEvent
 | project TimeGenerated, Account, IpAddress, Computer, LogonType
 | order by TimeGenerated desc
 ```
+
 ---
 
-🌍 GeoIP Enrichment
-A Sentinel Watchlist named `geoip` was used to enrich source IP addresses with geographic context.
+## GeoIP Enrichment
+
+The Sentinel Watchlist was used to enrich source IP addresses with geographic/network context.
+
 ```kql
 let GeoIPDB_FULL = _GetWatchlist("geoip");
 
@@ -210,14 +221,21 @@ let WindowsEvents =
 
 WindowsEvents
 ```
-## Investigation Value
-- GeoIP enrichment helps an analyst move from: Raw IP → Network → Geographic Context → Investigation
-- Geographic information should be treated as contextual intelligence rather than proof of an attacker's physical location.
+
+### Investigation Value
+
+The enrichment workflow allows an analyst to move from:
+
+**Raw IP → Network Context → Geographic Context → Investigation**
+
+Geographic information should be treated as contextual intelligence and not as proof of an attacker's physical location.
 
 ---
 
-Detection Rule
-The following query can form the basis of a Sentinel Analytics Rule for repeated failed authentication attempts:
+## Detection Engineering
+
+The following query can form the basis of a Microsoft Sentinel Analytics Rule for repeated failed authentication attempts:
+
 ```kql
 SecurityEvent
 | where EventID == 4625
@@ -228,7 +246,9 @@ SecurityEvent
     by IpAddress
 | where FailedAttempts >= 10
 | order by FailedAttempts desc
+```
 
+### Geographic Attack Map Query
 
 ```kql
 SecurityEvent
@@ -236,49 +256,169 @@ SecurityEvent
 | where EventID == 4625
 | where isnotempty(IpAddress)
 | extend geo = geo_info_from_ip_address(IpAddress)
-| extend latitude = toreal(geo.latitude),
-         longitude = toreal(geo.longitude),
-         cityname = tostring(geo.city),
-         countryname = tostring(geo.country)
+| extend
+    latitude = toreal(geo.latitude),
+    longitude = toreal(geo.longitude),
+    cityname = tostring(geo.city),
+    countryname = tostring(geo.country)
 | where isnotempty(latitude) and isnotempty(longitude)
-| summarize FailureCount = count(), 
-            TargetAccounts = dcount(TargetAccount) 
-         by IpAddress, cityname, countryname, latitude, longitude
-| extend MapLabel = strcat(cityname, ", ", countryname, " — ", FailureCount, " failed logons (", TargetAccounts, " targets)")
-| project latitude, longitude, MapLabel, FailureCount, TargetAccounts, IpAddress, cityname, countryname
+| summarize
+    FailureCount = count(),
+    TargetAccounts = dcount(TargetAccount)
+    by IpAddress, cityname, countryname, latitude, longitude
+| extend MapLabel = strcat(
+    cityname,
+    ", ",
+    countryname,
+    " — ",
+    FailureCount,
+    " failed logons (",
+    TargetAccounts,
+    " targets)"
+)
+| project
+    latitude,
+    longitude,
+    MapLabel,
+    FailureCount,
+    TargetAccounts,
+    IpAddress,
+    cityname,
+    countryname
 | order by FailureCount desc
-
--------------
-
-
-## Evidence Gallery
-Evidence	Screenshot
-- Azure Virtual Network <img width="1916" height="982" alt="Virtual Network created" src="https://github.com/user-attachments/assets/6ca9b7dd-01ac-4085-8f5a-612b377cdd2e" />
-- Azure VM	<img width="1992" height="968" alt="image" src="https://github.com/user-attachments/assets/63abbf95-6318-4479-a118-19e2d5cf88f2" />
-- Log Analytics Workspace	`<img width="1738" height="973" alt="image" src="https://github.com/user-attachments/assets/125a0fc0-d4f5-4f93-83ef-5d3fa6081633" />
-- Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
-- KQL Investigation	<img width="1999" height="981" alt="image" src="https://github.com/user-attachments/assets/5184ee2b-c7a9-4853-aef2-737d221c5f77" />
-- Attacker IP	`<img width="1999" height="981" alt="image" src="https://github.com/user-attachments/assets/bb138135-69c2-4cf5-ab7a-5c0661ecd636" />
-- Attacker Failed Attempts	<img width="1910" height="1023" alt="Failed Attempts" src="https://github.com/user-attachments/assets/2026daae-02d9-42c1-8ba9-64274f39c4b3" />
-- SigninLogs in Microsoft Sentinel <img width="1910" height="986" alt="Signinlogs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
-- GeoIP Enrichment	`<img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/c6fe7855-4c82-43fa-8fb5-aaec6fc7cfd4" />
-- Microsoft Defender for Endpoint: Advance Hunting `<img width="2003" height="1125" alt="image" src="https://github.com/user-attachments/assets/7eaf7fb4-f419-453f-8715-98ef8ecae15a" />
-- Advance Hunting <img width="1999" height="1104" alt="image" src="https://github.com/user-attachments/assets/f8d3904e-1d7f-46b8-9646-73573372a1c9" />
-- Failed Logon Attack Map (Event ID 4625) `<img width="1999" height="1006" alt="image" src="https://github.com/user-attachments/assets/7c682131-5234-435d-8e41-048afe5c4d70" />
-
-- Map Visualisation Settings
-- Visualisation: Select Map.
-- Latitude Field: latitude
-- Longitude Field: longitude
-- Size Settings: FailureCount (Aggregation: Sum)
-- Label Settings: MapLabel
-- Item Color Settings: Set to heatmap with a greenRed palette based on FailureCount.
+```
 
 ---
 
+## Investigation Workflow
+
+The investigation followed a typical SOC workflow:
+
+```text
+Telemetry
+   │
+   ▼
+Event ID 4625
+   │
+   ▼
+Identify Source IPs
+   │
+   ▼
+Count Failed Attempts
+   │
+   ▼
+Investigate Highest-Volume IPs
+   │
+   ▼
+GeoIP / Watchlist Enrichment
+   │
+   ▼
+Identify Attack Pattern
+   │
+   ▼
+Document Findings
+```
+
 ---
 
- ## Skills Demonstrated
+# Project Evidence Screenshots
+
+The screenshots below provide visual evidence of the Azure infrastructure, telemetry collection, KQL investigation, IP analysis, GeoIP enrichment and attack-map visualisation completed during the lab.
+
+## Azure Infrastructure
+
+### Azure Virtual Network
+
+<img width="1916" height="982" alt="Azure Virtual Network created" src="https://github.com/user-attachments/assets/6ca9b7dd-01ac-4085-8f5a-612b377cdd2e" />
+
+### Azure Virtual Machine
+
+<img width="1992" height="968" alt="Azure Virtual Machine" src="https://github.com/user-attachments/assets/63abbf95-6318-4479-a118-19e2d5cf88f2" />
+
+### Log Analytics Workspace
+
+<img width="1738" height="973" alt="Log Analytics Workspace" src="https://github.com/user-attachments/assets/125a0fc0-d4f5-4f93-83ef-5d3fa6081633" />
+
+### Microsoft Sentinel
+
+<img width="1910" height="986" alt="Microsoft Sentinel Sign-in Logs" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
+
+---
+
+## KQL Investigation
+
+### KQL Investigation
+
+<img width="1999" height="981" alt="KQL Investigation" src="https://github.com/user-attachments/assets/5184ee2b-c7a9-4853-aef2-737d221c5f77" />
+
+### Attacker IP
+
+<img width="1999" height="981" alt="Attacker IP investigation" src="https://github.com/user-attachments/assets/bb138135-69c2-4cf5-ab7a-5c0661ecd636" />
+
+### Attacker Failed Attempts
+
+<img width="1910" height="1023" alt="Attacker failed attempts" src="https://github.com/user-attachments/assets/2026daae-02d9-42c1-8ba9-64274f39c4b3" />
+
+### Sign-in Logs in Microsoft Sentinel
+
+<img width="1910" height="986" alt="Sign-in Logs in Microsoft Sentinel" src="https://github.com/user-attachments/assets/1928ffe1-30fc-4c70-ab89-495a6fc90a64" />
+
+---
+
+## GeoIP Enrichment
+
+### GeoIP Enrichment
+
+<img width="1999" height="1104" alt="GeoIP enrichment" src="https://github.com/user-attachments/assets/c6fe7855-4c82-43fa-8fb5-aaec6fc7cfd4" />
+
+---
+
+## Microsoft Defender for Endpoint
+
+### Advanced Hunting
+
+<img width="2003" height="1125" alt="Microsoft Defender for Endpoint Advanced Hunting" src="https://github.com/user-attachments/assets/7eaf7fb4-f419-453f-8715-98ef8ecae15a" />
+
+### Advanced Hunting Investigation
+
+<img width="1999" height="1104" alt="Advanced Hunting investigation" src="https://github.com/user-attachments/assets/f8d3904e-1d7f-46b8-9646-73573372a1c9" />
+
+---
+
+## Failed Logon Attack Map
+
+### Event ID 4625 Attack Map
+
+<img width="1999" height="1006" alt="Failed Logon Attack Map - Event ID 4625" src="https://github.com/user-attachments/assets/7c682131-5234-435d-8e41-048afe5c4d70" />
+
+### Map Visualisation Settings
+
+- **Visualisation:** Map
+- **Latitude Field:** `latitude`
+- **Longitude Field:** `longitude`
+- **Size Settings:** `FailureCount` — Aggregation: Sum
+- **Label Settings:** `MapLabel`
+- **Item Colour Settings:** Heatmap using a green-red palette based on `FailureCount`
+
+---
+
+## Key Findings
+
+- **Total failed authentication events:** 1,000 — all associated with Event ID 4625.
+- **Most active source IP:** `91.135.255.108` — 236 attempts within approximately 12 minutes (15:31:01–15:43:32 UTC on 2026-08-14).
+- **Second-highest source:** `101.6.52.190` — 14 attempts.
+- **Other source IPs:** 435 additional IPs generated the remaining activity, with most producing relatively small numbers of attempts.
+- **Observed attack window:** 2026-08-14, 15:31:01–17:11:19 UTC.
+- **Primary investigation signal:** Windows Event ID 4625.
+- **GeoIP context:** 436 unique source IPs were observed.
+- **Investigation assessment:** The observed pattern was assessed in the project as primarily consistent with repeated brute-force activity, with some characteristics that may also warrant password-spraying analysis.
+
+> **Note:** GeoIP information and authentication telemetry provide investigative context. They should be correlated with additional evidence before attributing activity to a specific actor or physical location.
+
+---
+
+## SOC Analyst Skills Demonstrated
+
 ![Security Operations](https://img.shields.io/badge/Security-Security%20Operations-0075ca?style=flat-square)
 ![SIEM Monitoring](https://img.shields.io/badge/SIEM-SIEM%20Monitoring-0075ca?style=flat-square)
 ![Alert Triage](https://img.shields.io/badge/SOC-Alert%20Triage-0075ca?style=flat-square)
@@ -306,9 +446,11 @@ Evidence	Screenshot
 ![Cloud SIEM Architecture](https://img.shields.io/badge/Architecture-Cloud%20SIEM%20Architecture-6f42c1?style=flat-square)
 
 ---
-📁 Repository Structure
+
+## Repository Structure
+
 ```text
-homelab-soc-siem/
+homelab-soc-siem-microsoft-sentinel/
 ├── README.md
 ├── architecture/
 │   └── soc-architecture.png
@@ -327,33 +469,24 @@ homelab-soc-siem/
 │   └── sample-incident-report.md
 └── screenshots/
 ```
----
 
-## Key Findings
-- Total failed authentication events: 1,000 (all Event ID 4625)
-- Most active source IP: 91.135.255.108 — 236 attempts, all within a tight ~12-minute window (15:31:01 – 15:43:32 UTC on 2026-08-14). This single IP is a clear outlier from the rest of the traffic.
-- Highest failed-attempt count:236 (91.135.255.108). Next-highest is 101.6.52.190 with only 14, then a long tail of 435 other IPs mostly attempting 1–6 times each.
-- Targeted account(s):
-  Администратор (Cyrillic for "Administrator") — 55 attempts, all from 91.135.255.108
-Гость (Cyrillic for "Guest") — 55 attempts, all from 91.135.255.108
-mulan-window120\NOUSER — 132 attempts (no source IP logged, shown as -)
-746 events logged an account value of literal #NAME? 
-A handful of fragment-like accounts (записи, пользователей, для — 4 each) also traced back exclusively to 91.135.255.108, and appear to be fragments of a longer Cyrillic phrase/username that was truncated or split during logging
-- Observed attack window:2026-08-14, 15:31:01 – 17:11:19 UTC (~100 minutes total), all on a single day/single host (mulan-window120).
-- GeoIP context:436 unique source IPs total. Excluding the dominant IP, 435 distinct IPs made only 764 attempts between them (mostly 1–6 each) — a wide, dispersed set of addresses (spanning Asia-Pacific, Europe, Africa, and North/South America ranges, several from cloud-hosting blocks), consistent with distributed/botnet infrastructure.
-- Initial assessment: HYBRID — BRUTE FORCE (primary) + PASSWORD SPRAYING (secondary)
+---
 
 ## Security & Cost Disclaimer
+
 This project is intended for educational and defensive security research.
-The honeypot is intentionally exposed for telemetry generation and must remain isolated from production systems.
-Do not store sensitive data, personal credentials, secrets, production workloads or confidential information on the honeypot.
-Azure resources can generate charges. Stop/deallocate or remove resources when the lab is not in use.
+
+- Keep the honeypot isolated from production systems.
+- Do not store sensitive data, personal credentials, secrets, production workloads or confidential information on the honeypot.
+- Restrict administrative access wherever possible.
+- Azure resources can generate charges. Stop/deallocate or remove resources when the lab is not in use.
+- Treat all observed IP addresses and geographic information as investigative data requiring appropriate context and validation.
 
 ---
 
-##  Contact
+## Contact
 
-If you have questions about this project or would like to discuss vulnerability management, Nessus, or cybersecurity more broadly:
+If you have questions about this project or would like to discuss vulnerability management, Microsoft Sentinel, KQL or cybersecurity more broadly:
 
 - 🔗 **GitHub:** [@oluwaseunadenuga](https://github.com/oluwaseunadenuga)
 - 💼 **LinkedIn:** [linkedin.com/in/oluwaseunadenuga](https://linkedin.com/in/oluwaseunadenuga)
@@ -363,4 +496,6 @@ If you have questions about this project or would like to discuss vulnerability 
 
 <div align="center">
 
+**Homelab SOC SIEM — Microsoft Sentinel & Microsoft Defender**
 
+</div>
