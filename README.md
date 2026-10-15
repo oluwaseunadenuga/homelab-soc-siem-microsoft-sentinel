@@ -1,5 +1,6 @@
 # Homelab SOC/SIEM - Live Attacker detection using Microsoft Sentinel 
 ![Azure](https://img.shields.io/badge/Microsoft%20Azure-Cloud%20Security-blue)
+<img width="1212" height="789" alt="Home Lab Full Architecture" src="https://github.com/user-attachments/assets/5474e4dc-8713-4586-9623-40820642bd9b" />
 ![Microsoft Sentinel](https://img.shields.io/badge/Microsoft%20Sentinel-SIEM-purple)
 ![KQL](https://img.shields.io/badge/KQL-Threat%20Hunting-orange)
 ![SOC](https://img.shields.io/badge/SOC-Lab-green)
