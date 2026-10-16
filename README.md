@@ -6,7 +6,6 @@
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 <img width="1131" height="661" alt="Home Lab Full Architecture" src="https://github.com/user-attachments/assets/100fed04-160f-4d64-843f-541082a56875" />
 
-
 ## Executive Summary
 
 This homelab demonstrates an end-to-end SOC monitoring and investigation workflow built with Microsoft Azure, Microsoft Sentinel, Log Analytics, Azure Monitor Agent (AMA), Data Collection Rules (DCR), KQL, Sentinel Watchlists and Microsoft Defender for Endpoint.
@@ -22,7 +21,6 @@ The project demonstrates practical capabilities across **SIEM monitoring, log co
 ## Business / SOC Problem
 
 Security teams need to identify suspicious authentication activity from large volumes of security telemetry and quickly determine:
-
 - Which systems are generating suspicious activity?
 - Which source IPs are generating the highest number of failures?
 - Which accounts are being targeted?
@@ -629,6 +627,6 @@ If you have questions about this project or would like to discuss Microsoft Sent
 
 <div align="center">
 
-**Homelab SOC SIEM — Microsoft Sentinel & Microsoft Defender**
+**Homelab SOC/SIEM-Microsoft Sentinel & Microsoft Defender**
 
 </div>
