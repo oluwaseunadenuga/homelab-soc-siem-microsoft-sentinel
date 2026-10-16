@@ -1,4 +1,4 @@
-# Homelab SOC/SIEM - Live Attacker detection using Microsoft Sentinel 
+# Homelab SOC/SIEM - Live Attacker detection using Azure & Sentinel 
 ![Azure](https://img.shields.io/badge/Microsoft%20Azure-Cloud%20Security-blue)
 ![Microsoft Sentinel](https://img.shields.io/badge/Microsoft%20Sentinel-SIEM-purple)
 ![KQL](https://img.shields.io/badge/KQL-Threat%20Hunting-orange)
