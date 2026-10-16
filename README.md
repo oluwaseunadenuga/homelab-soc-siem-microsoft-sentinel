@@ -4,7 +4,8 @@
 ![KQL](https://img.shields.io/badge/KQL-Threat%20Hunting-orange)
 ![SOC](https://img.shields.io/badge/SOC-Lab-green)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
-<img width="1212" height="789" alt="Home Lab Full Architecture" src="https://github.com/user-attachments/assets/5474e4dc-8713-4586-9623-40820642bd9b" />
+<img width="1131" height="661" alt="Home Lab Full Architecture" src="https://github.com/user-attachments/assets/100fed04-160f-4d64-843f-541082a56875" />
+
 
 ## Executive Summary
 
